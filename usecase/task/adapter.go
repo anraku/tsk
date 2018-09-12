@@ -10,7 +10,7 @@ type TaskRepository interface {
 	Delete(id int) error
 }
 
-type TaskUsecase interface {
+type TaskInteractor interface {
 	Fetch() ([]*models.Task, error)
 	GetByID(id int) (*models.Task, error)
 	Create(t *models.Task) error

@@ -2,32 +2,47 @@ package task
 
 import "github.com/anraku/tsk/models"
 
-type taskUsecase struct {
+type taskInteractor struct {
 	taskRepo TaskRepository
 }
 
-func NewTaskUsecase(t TaskRepository) TaskUsecase {
-	return &taskUsecase{
+func NewTaskInteractor(t TaskRepository) TaskInteractor {
+	return &taskInteractor{
 		taskRepo: t,
 	}
 }
 
-func (r *taskUsecase) Fetch() ([]*models.Task, error) {
-	return nil, nil
+func (r *taskInteractor) Fetch() ([]*models.Task, error) {
+	result, err := r.taskRepo.Fetch()
+	return result, err
 }
 
-func (r *taskUsecase) GetByID(id int) (*models.Task, error) {
-	return nil, nil
+func (r *taskInteractor) FetchUnDone() ([]*models.Task, error) {
+	result, err := r.taskRepo.FetchUnDone()
+	return result, err
 }
 
-func (r *taskUsecase) Create(t *models.Task) error {
-	return nil
+func (r *taskInteractor) FetchDone() ([]*models.Task, error) {
+	result, err := r.taskRepo.FetchDone()
+	return result, err
 }
 
-func (r *taskUsecase) Update(t *models.Task) error {
-	return nil
+func (r *taskInteractor) GetByID(id int) (*models.Task, error) {
+	result, err := r.taskRepo.GetByID()
+	return result, err
 }
 
-func (r *taskUsecase) Delete(id int) error {
-	return nil
+func (r *taskInteractor) Create(t *models.Task) error {
+	err := r.taskRepo.Create()
+	return result, err
+}
+
+func (r *taskInteractor) Update(t *models.Task) error {
+	err := r.taskRepo.Update()
+	return result, err
+}
+
+func (r *taskInteractor) Delete(id int) error {
+	err := r.taskRepo.Delete()
+	return result, err
 }
