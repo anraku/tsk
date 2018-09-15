@@ -23,7 +23,7 @@ func NewTaskHandler(e *echo.Echo, tu TaskInteractor) {
 	e.DELETE("/task/:id", handler.Delete)
 }
 
-var testModel = models.Task{
+var testModel = &models.Task{
 	Title:       "testtask",
 	Description: "test_desc",
 }
@@ -66,7 +66,7 @@ func (h *TaskHandler) GetByID(c echo.Context) error {
 
 func (h *TaskHandler) Create(c echo.Context) error {
 	//TODO: create model
-	err := h.taskInteractor.Create(&testModel)
+	err := h.taskInteractor.Create(testModel)
 	if err != nil {
 		return response.ErrInternalServerError(c, err)
 	}
@@ -75,7 +75,7 @@ func (h *TaskHandler) Create(c echo.Context) error {
 
 func (h *TaskHandler) Update(c echo.Context) error {
 	//TODO: create model
-	err := h.taskInteractor.Update(&testModel)
+	err := h.taskInteractor.Update(testModel)
 	if err != nil {
 		return response.ErrInternalServerError(c, err)
 	}

@@ -9,9 +9,9 @@ CREATE TABLE tasks (
 	priority integer,
 	status integer NOT NULL DEFAULT 0,
 	execute_time datetime,
-	creted_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	deleted_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleted_at datetime,
 	INDEX idx_id(id)
 ) ENGINE=InnoDB;
 

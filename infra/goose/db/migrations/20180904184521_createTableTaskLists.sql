@@ -6,9 +6,9 @@ CREATE TABLE task_lists (
 	task_id integer NOT NULL,
 	title varchar(100) NOT NULL,
 	description varchar(2000),
-	creted_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	deleted_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleted_at datetime,
 	INDEX idx_id(id),
 	FOREIGN KEY(task_id) REFERENCES tasks(id)
 ) ENGINE=InnoDB;

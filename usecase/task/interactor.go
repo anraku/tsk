@@ -29,7 +29,7 @@ func (r *taskInteractor) FetchDone() ([]*models.Task, error) {
 
 func (r *taskInteractor) GetByID(id int) (*models.Task, error) {
 	result, err := r.taskRepo.GetByID(id)
-	return result, err
+	return &result, err
 }
 
 func (r *taskInteractor) Create(t *models.Task) error {
