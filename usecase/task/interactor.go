@@ -28,21 +28,21 @@ func (r *taskInteractor) FetchDone() ([]*models.Task, error) {
 }
 
 func (r *taskInteractor) GetByID(id int) (*models.Task, error) {
-	result, err := r.taskRepo.GetByID()
+	result, err := r.taskRepo.GetByID(id)
 	return result, err
 }
 
 func (r *taskInteractor) Create(t *models.Task) error {
-	err := r.taskRepo.Create()
-	return result, err
+	err := r.taskRepo.Create(t)
+	return err
 }
 
 func (r *taskInteractor) Update(t *models.Task) error {
-	err := r.taskRepo.Update()
-	return result, err
+	err := r.taskRepo.Update(t)
+	return err
 }
 
 func (r *taskInteractor) Delete(id int) error {
-	err := r.taskRepo.Delete()
-	return result, err
+	err := r.taskRepo.Delete(id)
+	return err
 }

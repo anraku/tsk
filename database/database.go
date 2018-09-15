@@ -6,7 +6,8 @@ import (
 )
 
 func Connect() (*gorm.DB, error) {
-	db, err := gorm.Open("mysql", "root:password@tcp(mysql:3306)/app?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "root:password@tcp(0.0.0.0:3306)/tsk?charset=utf8&parseTime=True&loc=Local")
+	defer db.Close()
 	if err != nil {
 		return nil, err
 	}

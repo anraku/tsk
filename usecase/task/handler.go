@@ -1,6 +1,12 @@
 package task
 
-import "github.com/labstack/echo"
+import (
+	"strconv"
+
+	"github.com/anraku/tsk/models"
+	"github.com/anraku/tsk/presenter/response"
+	"github.com/labstack/echo"
+)
 
 type TaskHandler struct {
 	taskInteractor TaskInteractor
@@ -10,65 +16,80 @@ func NewTaskHandler(e *echo.Echo, tu TaskInteractor) {
 	handler := &TaskHandler{
 		taskInteractor: tu,
 	}
-	e.GET("/tasks", handler.FetchTasks)
+	e.GET("/tasks", handler.Fetch)
 	e.GET("/task/:id", handler.GetByID)
 	e.POST("/task/create", handler.Create)
 	e.PUT("/task/:id", handler.Update)
 	e.DELETE("/task/:id", handler.Delete)
 }
 
-func (h *TaskHandler) FetchTasks(c echo.Context) error {
+var testModel = models.Task{
+	Title:       "testtask",
+	Description: "test_desc",
+}
+
+func (h *TaskHandler) Fetch(c echo.Context) error {
 	result, err := h.taskInteractor.Fetch()
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	return response.Success(c, result)
 }
 
-func (h *TaskHandler) FetchUnDoneTasks(c echo.Context) error {
+func (h *TaskHandler) FetchUnDone(c echo.Context) error {
 	result, err := h.taskInteractor.FetchUnDone()
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	return response.Success(c, result)
 }
 
-func (h *TaskHandler) FetchDoneTasks(c echo.Context) error {
+func (h *TaskHandler) FetchDone(c echo.Context) error {
 	result, err := h.taskInteractor.FetchDone()
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return echo.c.JSON(result)
+	return response.Success(c, result)
 }
 
 func (h *TaskHandler) GetByID(c echo.Context) error {
-	result, err := h.taskInteractor.GetByID()
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	result, err := h.taskInteractor.GetByID(id)
+	if err != nil {
+		return response.ErrInternalServerError(c, err)
+	}
+	return response.Success(c, result)
 }
 
 func (h *TaskHandler) Create(c echo.Context) error {
-	result, err := h.taskInteractor.Create()
+	//TODO: create model
+	err := h.taskInteractor.Create(&testModel)
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	return response.Success(c, nil)
 }
 
 func (h *TaskHandler) Update(c echo.Context) error {
-	result, err := h.taskInteractor.Update()
+	//TODO: create model
+	err := h.taskInteractor.Update(&testModel)
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	return response.Success(c, nil)
 }
 
 func (h *TaskHandler) Delete(c echo.Context) error {
-	result, err := h.taskInteractor.Delete()
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		return err
+		return response.ErrInternalServerError(c, err)
 	}
-	return c.JSON(result)
+	err = h.taskInteractor.Delete(id)
+	if err != nil {
+		return response.ErrInternalServerError(c, err)
+	}
+	return response.Success(c, nil)
 }

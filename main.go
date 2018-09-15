@@ -21,11 +21,11 @@ func main() {
 	// Repository
 	taskRepo := task.NewTaskRepository(db)
 
-	// Usecase
-	taskUsecase := task.NewTaskUsecase(taskRepo)
+	// Interactor
+	taskInteractor := task.NewTaskInteractor(taskRepo)
 
 	// Handler
-	task.NewTaskHandler(e, taskUsecase)
+	task.NewTaskHandler(e, taskInteractor)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
