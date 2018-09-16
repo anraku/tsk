@@ -15,8 +15,8 @@
 - 「方針」と「詳細」が適切に分けられていない。例えばusecase内のhandler.goやrepository.goはフレームワークに依存している
 
 # 参考資料
-+ クリーンアーキテクチャ(The Clean Architecture翻訳)
+1. クリーンアーキテクチャ(The Clean Architecture翻訳)
 https://blog.tai2.net/the_clean_architecture.html
 
-+ Clean ArchitectureでAPI Serverを構築してみる
+2. Clean ArchitectureでAPI Serverを構築してみる
 https://qiita.com/hirotakan/items/698c1f5773a3cca6193e#interfacesdatabase--frameworks--drivers%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC
